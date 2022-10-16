@@ -1,0 +1,57 @@
+Dec 2021
+	*	Joomla 4 compatibility fixes
+	* ChoicesJS for drop-down select boxes
+	* Added DE translation
+Sep 2019
+	* Added new "Table" search results template
+Aug 2019
+	* Added search by SP Page Builder pages (com_sppagebuilder)
+Apr 2019
+	* Added french translation by Oubaïd Ismaël
+	* Added Date format parameter
+Mar 2019 
+	* Added Search history feature (for users) - available under search module after make search and page refresh
+	* Added Search statistic (for admins) - provides advanced search statistic with full information for each search and users who search it - available by custom link Your_site_url?gsearch=1&search_type=search_stats&search_mode=list
+Feb 2019
+	* Added compatibility with CW Multicategories plugin
+	* Added search results template for J2Store
+Jan 2019
+	* Added search results ordering by custom fields
+Nov 2018
+	* Added Save search for user session feature
+	* Added title select filter type
+	* Added compatibility with Repeatable field type
+	
+Oct 2018
+	* Added Dynamic values in select boxes (dynamic connection)
+	* Added Automatic form submit feature
+Sep 2018
+	* Added automatic results counter feature
+	* Added compatibility with Radical Multifield https://github.com/Delo-Design/radicalmultifield
+Aug 2018
+	* Added missed language translations
+	* Added ordering search results by category
+July 2018
+	* Added Columns parameter for filters grid
+
+March 2018 - articles_good_search_J3.x_v1.0.4_b0002
+	* New bootstrap select boxes
+	* Issues fixed
+
+Nov 2017 - articles_good_search_J3.x_v1.0.3_b0006
+	* some issues fixed
+	* added list/columns search results layout switcher
+Oct 2017 - articles_good_search_J3.x_v1.0.3_b0005
+	* new parameter for include featured articles
+	* new parameter for show read more text
+	
+Sep 2017 - articles_good_search_J3.x_v1.0.3_b0003
+	* Search function re-designed and improved, tested with 7k+ content items database it works great.
+
+v.1.0.2 May 2017 Andrey Miasoedov <molotow11@gmail.com>
+	* New Joomla 3.7 Articles Fields support
+	* Ajax mode
+	* Field connection feature (dependent, chined fields)
+
+v.1.0.1 March 2017 Andrey Miasoedov <molotow11@gmail.com>
+	* New version

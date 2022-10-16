@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<extension type="package" version="3.0" method="upgrade">
+	<name>Articles Good Search Package J4</name>
+	<author>Andrey Miasoedov</author>
+	<creationDate>Feb 2020</creationDate>
+	<packagename>articles_good_search</packagename>
+	<version>1.2.3</version>
+	<packager>Joomcar Team</packager>
+	<packagerurl>http://joomcar.net</packagerurl>
+	<description>Good search for your Joomla articles package</description>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<scriptfile>pkg_script.php</scriptfile>
+	<files>
+		<file type="module" id="mod_articles_good_search" client="site">mod_articles_good_search.zip</file>
+		<file type="plugin" id="articlesgoodsearch" group="system">articlesgoodsearch.zip</file>
+	</files>
+	<updateservers>
+		<server name="Articles Good Search Package" type="collection">http://joomcar.net/jed_update/joomla_articles_good_search/package.xml</server>
+	</updateservers>
+</extension>

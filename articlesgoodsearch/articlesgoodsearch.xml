@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="4.0" type="plugin" group="system" method="upgrade">
+	<name>System - Articles Good Search J4</name>
+	<author>Andrey Miasoedov</author>
+	<creationDate>Feb 2020</creationDate>
+	<copyright></copyright>
+	<authorEmail>molotow11@gmail.com</authorEmail>
+	<authorUrl>http://joomcar.net</authorUrl>
+	<version>1.2.2</version>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<files>
+		<filename plugin="articlesgoodsearch">articlesgoodsearch.php</filename>
+		<filename>index.html</filename>
+		<folder>models</folder>
+		<folder>template</folder>
+		<folder>view</folder>
+	</files>
+	<updateservers>
+		<server name="Articles Good Search Package" type="collection">http://joomcar.net/jed_update/joomla_articles_good_search/package.xml</server>
+	</updateservers>
+</extension>
