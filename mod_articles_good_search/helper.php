@@ -58,7 +58,7 @@ class modArticlesGoodSearchHelper {
 		}
 		
 		if($parent) {
-			$query = "SELECT id, title, level, extension FROM #__categories WHERE extension IN(".implode(",", $extensions).") AND parent_id = {$parent} AND published = 1 ORDER BY title ASC";
+			$query = "SELECT id, title, level, extension FROM #__categories WHERE extension IN(".implode(",", $extensions).") AND parent_id = {$parent} AND published = 1 ORDER BY lft DESC, title ASC";
 		}
 		else {
 			if($params) {
@@ -67,10 +67,10 @@ class modArticlesGoodSearchHelper {
 				}
 			}
 			if($params && count($categories_restriction)) {
-				$query = "SELECT id, title, level, extension FROM #__categories WHERE extension IN(".implode(",", $extensions).") AND id IN (".implode(",", $categories_restriction).") ORDER BY title ASC";				
+				$query = "SELECT id, title, level, extension FROM #__categories WHERE extension IN(".implode(",", $extensions).") AND id IN (".implode(",", $categories_restriction).") ORDER BY lft DESC, title ASC";				
 			}
 			else {
-				$query = "SELECT id, title, level, extension FROM #__categories WHERE extension IN(".implode(",", $extensions).") AND level = 1 AND published = 1 ORDER BY title ASC";
+				$query = "SELECT id, title, level, extension FROM #__categories WHERE extension IN(".implode(",", $extensions).") AND level = 1 AND published = 1 ORDER BY lft DESC, title ASC";
 			}
 		}
 		

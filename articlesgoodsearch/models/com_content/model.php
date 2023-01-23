@@ -286,8 +286,8 @@ class ArticlesModelGoodSearch extends JModelList {
 		$query = "";
 
 		//keyword
-		if(JFactory::getApplication()->input->getWord("keyword")) {
-			$keyword = strtoupper(JFactory::getApplication()->input->getWord("keyword"));
+		if($_REQUEST["keyword"]) {
+			$keyword = strtoupper($_REQUEST["keyword"]);
 			$keyword = addslashes($keyword);
 			$keyword = str_replace("/", "\\\\\\\/", $keyword);
 			$keyword = str_replace("(", "\\\\(", $keyword);
