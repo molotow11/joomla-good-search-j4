@@ -280,6 +280,10 @@ $wa->useStyle('choicesjs');
 		<?php
 			}
 		?>
+
+		<?php if($params->get("filter_match") == "All") { ?>
+			<input type="hidden" name="match" value="all" />
+		<?php } ?>
 		
 		<div style="clear:both;"></div>
 	</form>

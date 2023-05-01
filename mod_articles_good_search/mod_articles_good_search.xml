@@ -89,6 +89,10 @@
 					<option value="ajax">MOD_AGS_SEARCH_TYPE_AJAX</option>
 				</field>
 				<field name="ajax_container" type="text" default="div.ajax_container" label="MOD_AGS_AJAX_CONTAINER" />
+				<field name="filter_match" type="radio" class="btn-group" default="Any" label="MOD_AGS_FILTER_MATCH">
+					<option value="All">All</option>
+					<option value="Any">Any</option>
+				</field>
 				<field name="date_format" type="list" default="%e %b %Y::d M yyyy" label="MOD_AGS_DATE_FORMAT" description="MOD_AGS_DATE_FORMAT_DESC">
 					<option value="">Default</option>
 					<option value="%e %b %Y::d M yyyy">1 Jan 2012</option>

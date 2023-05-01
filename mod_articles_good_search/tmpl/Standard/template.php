@@ -256,6 +256,10 @@ setlocale(LC_ALL, $curr_locale);
 		
 		<input type="hidden" name="orderby" value="<?php echo JFactory::getApplication()->input->getWord("orderby"); ?>" />
 		<input type="hidden" name="orderto" value="<?php echo JFactory::getApplication()->input->getWord("orderto"); ?>" />
+
+		<?php if($params->get("filter_match") == "All") { ?>
+			<input type="hidden" name="match" value="all" />
+		<?php } ?>
 		
 		<div style="clear:both;"></div>
 	</form>
