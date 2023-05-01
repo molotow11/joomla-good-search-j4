@@ -348,7 +348,17 @@ class ArticlesModelGoodSearch extends JModelList {
 		
 		//tag
 		if((array)JFactory::getApplication()->input->get("tag")) {
-			$query .= " AND tm.tag_id IN (".implode(",", (array)JFactory::getApplication()->input->get("tag")).")";
+			$tags = (array)JFactory::getApplication()->input->get("tag");
+			if($_GET['match'] == 'all') {
+				foreach($tags as $tag) {
+					$tag = (int)$tag;
+					$type = ($context == "contact_details") ? "com_contact.contact" :  "com_content.article";
+					$query .= " AND {$tag} IN (SELECT tag_id FROM #__contentitem_tag_map WHERE content_item_id = i.id AND type_alias = '{$type}')";
+				}
+			}
+			else {
+				$query .= " AND (tm.tag_id IN(".implode(",", $tags)."))";
+			}
 		}
 		if(JFactory::getApplication()->input->getInt("j2store_tag")) {
 			$query .= " AND tm.tag_id = ".JFactory::getApplication()->input->getInt("j2store_tag");
