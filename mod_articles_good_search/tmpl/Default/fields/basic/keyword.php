@@ -8,7 +8,6 @@
 
 // no direct access
 defined('_JEXEC') or die('Restricted access');
-
 ?>
 
 <div class="gsearch-field-text keyword">	
@@ -19,7 +18,7 @@ defined('_JEXEC') or die('Restricted access');
 			class="inputbox" 
 			name="keyword" 
 			type="text" 
-			value="<?php echo JFactory::getApplication()->input->getWord('keyword'); ?>"
+			value="<?php echo $_REQUEST['keyword']; ?>"
 	/>
 </div>
 

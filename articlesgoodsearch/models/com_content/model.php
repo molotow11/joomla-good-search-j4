@@ -293,6 +293,7 @@ class ArticlesModelGoodSearch extends JModelList {
 			$keyword = str_replace("(", "\\\\(", $keyword);
 			$keyword = str_replace(")", "\\\\)", $keyword);
 			$keyword = str_replace("*", "\\\\*", $keyword);
+			
 			if($_GET['match']) {
 				$query .= " AND (";
 				$condition = $_GET['match'] == "all" ? " AND " : " OR ";
@@ -382,14 +383,17 @@ class ArticlesModelGoodSearch extends JModelList {
 		$module_helper = new modArticlesGoodSearchHelper;
 
 		foreach($_REQUEST as $param=>$value) {
-			preg_match('/^field([0-9]+)$/', $param, $matches);
+			preg_match('/^field([0-9]+)*/smix', $param, $matches);
 			$field_id = $matches[1];
 			if(!$field_id) continue;
-			$query_params = $value;//JFactory::getApplication()->input->get("field{$field_id}");
+			$query_params = $value;
 			$sub_query = "SELECT DISTINCT item_id FROM #__fields_values WHERE 1";
 			
 			//text / date
-			if(!is_array($query_params) && $query_params != "") {
+			if(!is_array($query_params) && $query_params != ""
+				&& !str_contains($param, '-from')
+				&& !str_contains($param, '-to')
+			) {
 				$query_params = addslashes($query_params);
 				$sub_query .= " AND field_id = {$field_id}";
 				$field_params = $module_helper->getCustomField($field_id);
@@ -434,10 +438,10 @@ class ArticlesModelGoodSearch extends JModelList {
 			//text range / date range
 			preg_match('/^field([0-9]+)-from$/', $param, $matches);
 			$field_id = $matches[1];
-			if(JFactory::getApplication()->input->getWord("field{$field_id}-from") != "") {
+			if($_REQUEST["field{$field_id}-from"] != "") {
 				$sub_query .= " AND field_id = {$field_id}";
 				$field_params = $module_helper->getCustomField($field_id);
-				$query_params = JFactory::getApplication()->input->getWord("field{$field_id}-from");
+				$query_params = $_REQUEST["field{$field_id}-from"];
 				$query_params = addslashes($query_params);
 				if($field_params->type == "calendar") {
 					$date_search = new DateTime($query_params, $timezone);
@@ -457,10 +461,10 @@ class ArticlesModelGoodSearch extends JModelList {
 
 			preg_match('/^field([0-9]+)-to$/', $param, $matches);
 			$field_id = $matches[1];
-			if(JFactory::getApplication()->input->getWord("field{$field_id}-to") != "") {
+			if($_REQUEST["field{$field_id}-to"] != "") {
 				$sub_query .= " AND field_id = {$field_id}";
 				$field_params = $module_helper->getCustomField($field_id);
-				$query_params = JFactory::getApplication()->input->getWord("field{$field_id}-to");
+				$query_params = $_REQUEST["field{$field_id}-to"];
 				$query_params = addslashes($query_params);
 				if($field_params->type == "calendar") {
 					$date_search = new DateTime($query_params, $timezone);
@@ -477,6 +481,7 @@ class ArticlesModelGoodSearch extends JModelList {
 					$sub_query .= " AND value <= {$query_params}";
 				}
 			}
+			
 			// Execute query and get item ids
 			if($query_params != "" && $query_params[0] != "") {
 				$ids = JFactory::getDBO()->setQuery($sub_query)->loadColumn();

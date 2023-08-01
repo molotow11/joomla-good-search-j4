@@ -11,7 +11,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 $titles = $helper->getItemsTitles($params);
-$active = JFactory::getApplication()->input->getWord("keyword");
+$active = $_REQUEST["keyword"];
 ?>
 
 <div class="gsearch-field-select title">	
