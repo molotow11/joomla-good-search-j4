@@ -107,7 +107,7 @@ class ArticlesModelGoodSearch extends JModelList {
 		if(JFactory::getApplication()->input->getWord("keyword")) {
 			//left join all fields values for keyword search
 			//commented for prevent slow loading with big databases
-			//$query .= " LEFT JOIN #__fields_values AS fv ON fv.item_id = i.id";
+			$query .= " LEFT JOIN #__fields_values AS fv ON fv.item_id = i.id";
 		}
 		
 		$query .= " LEFT JOIN #__contentitem_tag_map AS tm 
@@ -387,7 +387,10 @@ class ArticlesModelGoodSearch extends JModelList {
 			$field_id = $matches[1];
 			if(!$field_id) continue;
 			$query_params = $value;
-			$sub_query = "SELECT DISTINCT item_id FROM #__fields_values WHERE 1";
+			$sub_query = "SELECT DISTINCT item_id, field_id FROM #__fields_values AS fv";
+			$sub_query .= " WHERE field_id = {$field_id}";
+			$sub_query .= " GROUP BY item_id";
+			$sub_query .= " HAVING 1";
 			
 			//text / date
 			if(!is_array($query_params) && $query_params != ""
@@ -422,12 +425,15 @@ class ArticlesModelGoodSearch extends JModelList {
 				$sub_query .= " AND (";
 				foreach($query_params as $k=>$query_param) {
 					$query_param = addslashes($query_param);
-					$sub_query .= "value = '{$query_param}'";
-					if(($k+1) != count($query_params)) {
-						if($_GET['match'] == "all") {
+					if($_GET['match'] == "all") {
+						$sub_query .= "GROUP_CONCAT(fv.value) LIKE '%{$query_param}%'";
+						if(($k+1) != count($query_params)) {
 							$sub_query .= " AND ";
 						}
-						else {
+					}
+					else {
+						$sub_query .= "value = '{$query_param}'";
+						if(($k+1) != count($query_params)) {
 							$sub_query .= " OR ";
 						}
 					}
