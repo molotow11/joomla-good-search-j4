@@ -387,7 +387,7 @@ class ArticlesModelGoodSearch extends JModelList {
 			$field_id = $matches[1];
 			if(!$field_id) continue;
 			$query_params = $value;
-			$sub_query = "SELECT DISTINCT item_id, field_id FROM #__fields_values AS fv";
+			$sub_query = "SELECT DISTINCT item_id, field_id, value FROM #__fields_values AS fv";
 			$sub_query .= " WHERE field_id = {$field_id}";
 			$sub_query .= " GROUP BY item_id";
 			$sub_query .= " HAVING 1";
