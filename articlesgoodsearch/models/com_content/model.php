@@ -79,8 +79,8 @@ class ArticlesModelGoodSearch extends JModelList {
 			}
 			
 			$default_ordering = $featuredFirst ? 'featured' : $this->module_params->ordering_default;
-			$orderby = JFactory::getApplication()->input->getWord("orderby", $default_ordering);
-			$orderto = JFactory::getApplication()->input->getWord("orderto", $this->module_params->ordering_default_dir);
+			$orderby = isset($_GET["orderby"]) ? $_GET["orderby"] : $default_ordering;
+			$orderto = isset($_GET["orderto"]) ? $_GET["orderto"] : $this->module_params->ordering_default_dir;
 			
 			$query = "SELECT i.*, GROUP_CONCAT(tm.tag_id) as tags, cat.title as category";
 			//select field ordering value
@@ -387,7 +387,7 @@ class ArticlesModelGoodSearch extends JModelList {
 			$field_id = $matches[1];
 			if(!$field_id) continue;
 			$query_params = $value;
-			$sub_query = "SELECT DISTINCT item_id, field_id, value FROM #__fields_values AS fv";
+			$sub_query = "SELECT DISTINCT item_id, field_id FROM #__fields_values AS fv";
 			$sub_query .= " WHERE field_id = {$field_id}";
 			$sub_query .= " GROUP BY item_id";
 			$sub_query .= " HAVING 1";
@@ -1007,8 +1007,8 @@ class ArticlesModelGoodSearch extends JModelList {
 		}
 		
 		$default_ordering = $featuredFirst ? 'featured' : $this->module_params->ordering_default;
-		$orderby = JFactory::getApplication()->input->getWord("orderby", $default_ordering);
-		$orderto = JFactory::getApplication()->input->getWord("orderto", $this->module_params->ordering_default_dir);
+		$orderby = isset($_GET["orderby"]) ? $_GET["orderby"] : $default_ordering;
+		$orderto = isset($_GET["orderto"]) ? $_GET["orderto"] : $this->module_params->ordering_default_dir;
 		
 		switch($orderby) {
 			case "title" :
