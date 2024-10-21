@@ -410,11 +410,12 @@ class ArticlesModelGoodSearch extends JModelList {
 				else {
 					$extra_params = json_decode($field_params->fieldparams);
 					$numeric = array('anum', 'integer', 'float');
+					$query_encoded = trim(str_replace("\\", "\\\\\\\\", json_encode($query_params)), "\"");
 					if(in_array($extra_params->filter, $numeric)) { // filter as number
 						$sub_query .= " AND value = '{$query_params}'";
 					}
 					else {
-						$sub_query .= " AND value LIKE '%{$query_params}%'";
+						$sub_query .= " AND (value LIKE '%{$query_params}%' OR value LIKE '%" . $query_encoded . "%')";
 					}
 				}
 			}
@@ -486,6 +487,12 @@ class ArticlesModelGoodSearch extends JModelList {
 					}
 					$sub_query .= " AND value <= {$query_params}";
 				}
+			}
+
+			if(isset($_GET['debug'])) {
+				var_dump("--------- SUB QUERY for field {$field_id}<br />");
+				var_dump($sub_query);
+				var_dump("<be /><br />");
 			}
 			
 			// Execute query and get item ids
@@ -570,6 +577,7 @@ class ArticlesModelGoodSearch extends JModelList {
 					$sub_query .= " AND item_id = 0";
 				}
 			}
+
 			// Execute query and get item ids
 			if($uri_params != "" && $uri_params[0] != "") {
 				$ids = JFactory::getDBO()->setQuery($sub_query)->loadColumn();
